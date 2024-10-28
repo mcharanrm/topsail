@@ -347,6 +347,32 @@ ci_presets:
     export_artifacts.enabled: true
 
   # ---
+  # A new set of opensource LLM models
+  #
+  profile_llm_models:
+    extends: [e2e_perf, raw, vllm]
+    tests.e2e.models:
+    - name: granite-7b-instruct
+      testing:
+        size: small
+    - name: llama-3-1-8b-instruct
+      model: llama-3.1-8b-instruct
+      testing:
+        size: small
+    - name: granite-34b-code-instruct-8k
+      testing:
+        size: large
+    - name: llama-3-1-70b-instruct
+      model: llama-3.1-70b-instruct
+      testing:
+        size: large
+    tests.e2e.matbenchmark.enabled: true
+    tests.e2e.llm_load_test.args.concurrency: 1
+    tests.e2e.llm_load_test.args.duration: 60
+    matbench.lts.opensearch.export.enabled: false
+    matbench.lts.regression_analyses.enabled: false
+
+  # ---
   # multi-model
   # ---
 
